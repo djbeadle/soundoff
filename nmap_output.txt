@@ -1,0 +1,14 @@
+
+Starting Nmap 6.00 ( http://nmap.org ) at 2014-08-17 18:42 PDT
+Nmap scan report for 10.0.0.1
+Host is up (0.00059s latency).
+MAC Address: 11:22:33:44:55:66 (Netgear)
+Nmap scan report for 10.0.0.5
+Host is up (0.052s latency).
+MAC Address: 11:22:33:44:55:66 (Apple)
+Nmap scan report for 10.0.0.8
+Host is up.
+Nmap scan report for 10.0.0.12
+Host is up (0.18s latency).
+MAC Address: 11:22:33:44:55:66 (Hon Hai Precision Ind. Co.)
+Nmap done: 30 IP addresses (4 hosts up) scanned in 24.96 seconds
