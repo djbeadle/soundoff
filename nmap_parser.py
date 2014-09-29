@@ -19,7 +19,8 @@ for line in dictionary_ref:
 dictionary_ref.close()
 
 for line in nmap:
-
+   
+   # You should change the next line to your own subnet
    match_ip = re.search("10\.0\.0\.(.*)", line)
    match_mac = re.search("..:..:..:..:..:..", line)
 
@@ -27,8 +28,10 @@ for line in nmap:
       ip_addresses.insert(0, match_ip.group(0))
       match_ip_var = match_ip.group(0)
 
-# For some reason the rPi's own MAC address doesn't register.
-# This manually ads it in when it's static ip is detected
+# For some reason the rPi's I run this on doesn't recognize its own MAC address
+# (In the nmap output it shows the IP but not the MAC). This manually adds
+# it in when it's static ip is detected. If you don't have that
+# issue and it's messing things up, just delete the elif.  
 
    elif match_ip_var == "10.0.0.8":
       mac_addresses.insert(0, "B8:27:EB:AA:C3:AA")
