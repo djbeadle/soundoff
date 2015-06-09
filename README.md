@@ -5,7 +5,9 @@ Soundoff should live in a folder named, “Soundoff” in your home directory. W
 To make Soundoff work on your system:
 
 1) Change the ip address range in soundoff.sh to the appropriate values
+
 2) Populate dictionary_reference.txt with your hostnames. The format should be, “00:11:22:33:44:55=Hostname” with only one entry per line. 
+
 3) OPTIONAL: Add a bash alias so you can run Soundoff from a simple command anywhere. My entry looks like: “alias soundoff=~/soundoff/soundoff.sh”
 
 Soundoff requires the python library prettytable which can be found here: https://code.google.com/p/prettytable/ . It also requires nmap to be installed. 
