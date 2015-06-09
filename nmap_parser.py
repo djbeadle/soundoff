@@ -1,13 +1,18 @@
 #!/usr/bin/env python
+
 import os
-os.system("echo 'Beginning Scan...'")
-os.system("sudo nmap -sP 10.0.0.1-20>~/soundoff/nmap_output.txt")
 import re
 from prettytable import PrettyTable
+
+os.system("echo 'Beginning Scan...'")
+os.system("sudo nmap -sP 10.0.0.1-20>~/Soundoff/nmap_output.txt")
+
 # This, of course, is the output from Nmap
-nmap = open("/home/pi/soundoff/nmap_output.txt","r")
+nmap = open("~/Soundoff/nmap_output.txt","r")
+
 # This is where we get the Hostname/MAC address combos
-dictionary_ref = open("/home/pi/soundoff/dictionary_reference.txt", "r")
+dictionary_ref = open("~/Soundoff/dictionary_reference.txt", "r")
+
 ip_addresses = []
 mac_addresses = []
 match_ip_var = "cats"
@@ -19,19 +24,16 @@ for line in dictionary_ref:
 dictionary_ref.close()
 
 for line in nmap:
-   
-   # You should change the next line to your own subnet
-   match_ip = re.search("10\.0\.0\.(.*)", line)
+
+   match_ip = re.search("10\.0\.0\.(.*)", line) # This regex, of course, needs to be modified to suit your own IP structure.
    match_mac = re.search("..:..:..:..:..:..", line)
 
    if match_ip:
       ip_addresses.insert(0, match_ip.group(0))
       match_ip_var = match_ip.group(0)
 
-# For some reason the rPi's I run this on doesn't recognize its own MAC address
-# (In the nmap output it shows the IP but not the MAC). This manually adds
-# it in when it's static ip is detected. If you don't have that
-# issue and it's messing things up, just delete the elif.  
+# For some reason the rPi's own MAC address doesn't register.
+# This manually ads it in when it's static ip is detected
 
    elif match_ip_var == "10.0.0.8":
       mac_addresses.insert(0, "B8:27:EB:AA:C3:AA")
