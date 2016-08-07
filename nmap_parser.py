@@ -2,12 +2,15 @@
 
 import os
 import re
+import sys
 from prettytable import PrettyTable
 
-# Configuration
-nmap_output_path = "./nmap_output.txt"
-dictionary_ref_path = "./dictionary_reference.txt"
+# Paths
+script_root_directory = sys.path[0]
+nmap_output_path = script_root_directory + "/nmap_output.txt"
+dictionary_ref_path = script_root_directory + "/dictionary_reference.txt"
 
+# Configuration
 ip_range = "10.0.0.1-20"
 ip_range_regex = "10\.0\.0\.(.*)" # This regex, of course, needs to be modified to suit your own IP structure.
 local_ip = "10.0.0.8"
