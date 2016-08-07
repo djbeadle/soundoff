@@ -4,14 +4,23 @@ import os
 import re
 from prettytable import PrettyTable
 
+# Configuration
+nmap_output_path = "./nmap_output.txt"
+dictionary_ref_path = "./dictionary_reference.txt"
+
+ip_range = "10.0.0.1-20"
+ip_range_regex = "10\.0\.0\.(.*)"
+local_ip = "10.0.0.8"
+local_mac = "B8:27:EB:AA:C3:AA"
+
 os.system("echo 'Beginning Scan...'")
-os.system("sudo nmap -sP 10.0.0.1-20>~/Soundoff/nmap_output.txt")
+os.system("sudo nmap -sP " + ip_range + " > " + nmap_output_path)
 
 # This, of course, is the output from Nmap
-nmap = open("~/Soundoff/nmap_output.txt","r")
+nmap = open(nmap_output_path, "r")
 
 # This is where we get the Hostname/MAC address combos
-dictionary_ref = open("~/Soundoff/dictionary_reference.txt", "r")
+dictionary_ref = open(dictionary_ref_path, "r")
 
 ip_addresses = []
 mac_addresses = []
@@ -25,7 +34,7 @@ dictionary_ref.close()
 
 for line in nmap:
 
-   match_ip = re.search("10\.0\.0\.(.*)", line) # This regex, of course, needs to be modified to suit your own IP structure.
+   match_ip = re.search(ip_range_regex, line) # This regex, of course, needs to be modified to suit your own IP structure.
    match_mac = re.search("..:..:..:..:..:..", line)
 
    if match_ip:
@@ -35,8 +44,8 @@ for line in nmap:
 # For some reason the rPi's own MAC address doesn't register.
 # This manually ads it in when it's static ip is detected
 
-   elif match_ip_var == "10.0.0.8":
-      mac_addresses.insert(0, "B8:27:EB:AA:C3:AA")
+   elif match_ip_var == local_ip:
+      mac_addresses.insert(0, local_mac)
 
    if match_mac:
       mac_addresses.insert(0, match_mac.group(0))
